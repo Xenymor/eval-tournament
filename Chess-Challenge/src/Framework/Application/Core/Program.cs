@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ChessChallenge.API;
+using ChessChallenge.UCI;
 using Raylib_cs;
+using System;
 using System.IO;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using ChessChallenge.API;
-using ChessChallenge.UCI;
 
 namespace ChessChallenge.Application
 {
@@ -16,11 +16,11 @@ namespace ChessChallenge.Application
         public static void Main(string[] args)
         {
             // UCI code in Main by Selenaut, based on the UCI implementation by A_randomnoob
-            if(args.Length == 1 && args[0].Contains("cutechess"))
+            if (args.Length == 1 && args[0].Contains("cutechess"))
             {
                 string argstr = args[0].Substring(args[0].IndexOf("uci"));
                 string[] ccArgs = argstr.Split(" ");
-                if(ccArgs.Length == 2 && ccArgs[0] == "uci")
+                if (ccArgs.Length == 2 && ccArgs[0] == "uci")
                 {
                     Console.WriteLine("Starting up in UCI mode...");
                     StartUCI(ccArgs);
@@ -39,8 +39,8 @@ namespace ChessChallenge.Application
                 return;
             }
             Console.WriteLine("Starting up in GUI mode...");
-            
-            
+
+
             Vector2 loadedWindowSize = GetSavedWindowSize();
             int screenWidth = (int)loadedWindowSize.X;
             int screenHeight = (int)loadedWindowSize.Y;
@@ -84,12 +84,12 @@ namespace ChessChallenge.Application
 
         public static void StartUCI(string[] args)
         {
-            
+
             Console.WriteLine("Starting in UCI mode!");
-            
+
             ChallengeController.PlayerType player;
             bool success = Enum.TryParse(args[1], out player);
-            
+
             if (!success)
             {
                 Console.Error.WriteLine($"Failed to start bot with player type {args[1]}");
@@ -106,7 +106,7 @@ namespace ChessChallenge.Application
             UCIBot uci = new UCIBot(bot, player);
             uci.Run();
         }
-        
+
         public static void SetWindowSize(Vector2 size)
         {
             Raylib.SetWindowSize((int)size.X, (int)size.Y);
@@ -157,7 +157,7 @@ namespace ChessChallenge.Application
             File.WriteAllText(FileHelper.PrefsFilePath, isBigWindow ? "1" : "0");
         }
 
-      
+
 
     }
 

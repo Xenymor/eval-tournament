@@ -17,7 +17,7 @@ namespace ChessChallenge.UCI
 
         static readonly string defaultFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-		public UCIBot(IChessBot bot, ChallengeController.PlayerType type)
+        public UCIBot(IChessBot bot, ChallengeController.PlayerType type)
         {
             this.bot = bot;
             this.type = type;
@@ -42,13 +42,13 @@ namespace ChessChallenge.UCI
             else
             {
                 if (args[1] == "startpos")
-				{
-					board.LoadStartPosition();
-				}
+                {
+                    board.LoadStartPosition();
+                }
                 else
-				{
-					board.LoadPosition(String.Join(" ", args.AsSpan(2, idx - 2).ToArray()));
-				}
+                {
+                    board.LoadPosition(String.Join(" ", args.AsSpan(2, idx - 2).ToArray()));
+                }
 
                 for (int i = idx + 1; i < args.Length; i++)
                 {

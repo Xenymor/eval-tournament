@@ -1,17 +1,17 @@
-﻿using ChessChallenge.Chess;
+﻿using ChessChallenge.Application.APIHelpers;
+using ChessChallenge.Chess;
 using Raylib_cs;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.IO;
+using System.Numerics;
 using static ChessChallenge.Application.UIHelper;
-using ChessChallenge.Application.APIHelpers;
 
 namespace ChessChallenge.Application
 {
     public class BoardUI
     {
-      
+
         // Board settings
         const int squareSize = 90;
         const double moveAnimDuration = 0.15;
@@ -50,7 +50,7 @@ namespace ChessChallenge.Application
 
         public EvalBar UpperEval;
         public EvalBar LowerEval;
-        
+
 
         public enum HighlightType
         {
@@ -72,7 +72,7 @@ namespace ChessChallenge.Application
             squareColOverrides = new Dictionary<int, Color>();
             topTextCol = inactiveTextCol;
             bottomTextCol = inactiveTextCol;
-            
+
             int boardStartX = -squareSize * 4;
             int boardStartY = -squareSize * 4;
             UpperEval = new EvalBar(new Rectangle(boardStartX - 12, boardStartY - squareSize * 1.25f, squareSize * 8 + 24,
@@ -218,10 +218,10 @@ namespace ChessChallenge.Application
 
             DrawBorder();
             ForEachSquare(DrawSquare);
-            
+
             UpperEval.Draw();
             LowerEval.Draw();
-            
+
             if (isAnimatingMove)
             {
                 UpdateMoveAnimation(animT);
@@ -382,7 +382,7 @@ namespace ChessChallenge.Application
         void DrawBitboardDebugOverlaySquare(int file, int rank)
         {
             ulong bitboard = BitboardDebugState.BitboardToVisualize;
-            bool isSet = BitBoardUtility.ContainsSquare(bitboard, new Coord(file,rank).SquareIndex);
+            bool isSet = BitBoardUtility.ContainsSquare(bitboard, new Coord(file, rank).SquareIndex);
             Color col = isSet ? bitboardColONE : bitboardColZERO;
 
             Vector2 squarePos = GetSquarePos(file, rank, whitePerspective);
