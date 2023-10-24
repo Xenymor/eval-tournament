@@ -57,10 +57,6 @@ public class Evaluator : IEvaluator
 
     private int getPS(int mg, int piece, int square)
     {
-        int index = mg * 48 + piece * 8 + square / 8;
-        ulong value = psTables[index];
-        index = square % 8;
-        index = Math.Min(7 - index, index);
-        return (int)((1023ul) & (value >> (10 * index))) * 10;
+        return (int)(1023ul & (psTables[mg * 48 + piece * 8 + square / 8] >> (10 * Math.Min(square % 8, 7 - square % 8)))) * 10;
     }
 }
